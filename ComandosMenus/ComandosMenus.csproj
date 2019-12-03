@@ -63,6 +63,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="commands\EditCommands.cs" />
+    <Compile Include="commands\FileCommands.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -93,6 +95,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\add.ico" />
+    <Resource Include="img\copy.ico" />
+    <Resource Include="img\delete.ico" />
+    <Resource Include="img\exit.ico" />
+    <Resource Include="img\menu.ico" />
+    <Resource Include="img\paste.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

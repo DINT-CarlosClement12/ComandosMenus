@@ -4,9 +4,123 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComandosMenus"
+        xmlns:commands="clr-namespace:ComandosMenus.commands"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="ApplicationCommands.New"
+            Executed="FileCommands_New_Executed"
+            CanExecute="FileCommands_New_CanExecute"/>
+        <CommandBinding
+            Command="commands:FileCommands.Exit"
+            Executed="FileCommands_Exit_Executed"
+            CanExecute="FileCommands_Exit_CanExecute"/>
+
+        <CommandBinding
+            Command="ApplicationCommands.Copy"
+            Executed="FileCommands_Copy_Executed"
+            CanExecute="FileCommands_Copy_CanExecute"/>
+        <CommandBinding
+            Command="ApplicationCommands.Paste"
+            Executed="FileCommands_Paste_Executed"
+            CanExecute="FileCommands_Paste_CanExecute"/>
+
+        <CommandBinding
+            Command="commands:EditCommands.Clear"
+            Executed="FileCommands_Clear_Executed"
+            CanExecute="FileCommands_Clear_CanExecute"/>
+    </Window.CommandBindings>
+    
+    <DockPanel LastChildFill="True">
+
+        <Menu DockPanel.Dock="Top">
+            
+            <MenuItem Header="_Archivo">
+                <MenuItem Header="_Nuevo" x:Name="File_AddMenuItem" Command="ApplicationCommands.New">
+                    <MenuItem.Icon>
+                        <Image Source="img/add.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Salir" x:Name="File_ExitMenuItem" Command="commands:FileCommands.Exit">
+                    <MenuItem.Icon>
+                        <Image Source="img/exit.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="_Editar">
+                <MenuItem Header="_Copiar" x:Name="Edit_CopyMenuItem" Command="ApplicationCommands.Copy">
+                    <MenuItem.Icon>
+                        <Image Source="img/copy.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Pegar" x:Name="Edit_PasteMenuItem" Command="ApplicationCommands.Paste">
+                    <MenuItem.Icon>
+                        <Image Source="img/paste.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Vaciar" x:Name="Edit_ClearMenuItem" Command="commands:EditCommands.Clear">
+                    <MenuItem.Icon>
+                        <Image Source="img/delete.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="_Ver">
+                <MenuItem x:Name="Show_GeneralMenuItem" Header="Barra de herramientas _General" IsCheckable="True" IsChecked="True"/>
+                <MenuItem x:Name="Show_EdicionMenuItem" Header="Barra de herramientas de _Edición" IsCheckable="True" IsChecked="True"/>
+            </MenuItem>
+
+        </Menu>
+
+        <ToolBarTray DockPanel.Dock="Top">
+
+            <ToolBar Visibility="{Binding ElementName=Show_GeneralMenuItem, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button x:Name="AddToolbar" Command="ApplicationCommands.New">
+                    <Image Source="img/add.ico"/>
+                </Button>
+                <Button x:Name="ExitToolBar" Command="commands:FileCommands.Exit">
+                    <Image Source="img/exit.ico"/>
+                </Button>
+            </ToolBar>
+
+            <ToolBar Visibility="{Binding ElementName=Show_EdicionMenuItem, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button x:Name="CopyToolbar" Command="ApplicationCommands.Copy">
+                    <Image Source="img/copy.ico"/>
+                </Button>
+                <Button x:Name="PasteToolbar" Command="ApplicationCommands.Paste">
+                    <Image Source="img/paste.ico"/>
+                </Button>
+                <Button x:Name="ClearToolBar" Command="commands:EditCommands.Clear">
+                    <Image Source="img/delete.ico"/>
+                </Button>
+            </ToolBar>
+
+        </ToolBarTray>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock>Carlos Clement Bellido</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="HourTextBlock">--:--:--</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+
+        <Border BorderBrush="Gray" Margin="10" BorderThickness="1">
+            <Grid>
+                <ListBox Name="ItemsListBox"/>
+            </Grid>
+        </Border>
+
+    </DockPanel>
+
 </Window>
