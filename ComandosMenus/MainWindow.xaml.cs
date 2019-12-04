@@ -55,7 +55,7 @@ namespace ComandosMenus
         private void FileCommands_New_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (ItemsListBox != null)
-                e.CanExecute = ItemsListBox.Items.Count <= 10;
+                e.CanExecute = ItemsListBox.Items.Count < 10;
             else
                 e.CanExecute = true;
         }
@@ -87,7 +87,7 @@ namespace ComandosMenus
 
         private void FileCommands_Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = clipboard != null && ItemsListBox != null && ItemsListBox.Items.Count <= 10;
+            e.CanExecute = clipboard != null && ItemsListBox != null && ItemsListBox.Items.Count < 10;
         }
 
         private void FileCommands_Clear_Executed(object sender, ExecutedRoutedEventArgs e)
