@@ -6,10 +6,16 @@
         xmlns:local="clr-namespace:ComandosMenus"
         xmlns:commands="clr-namespace:ComandosMenus.commands"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Cocaína" Height="450" Width="800" Icon="img/menu.ico">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <ContextMenu x:Key="EditContextMenu">
+            <MenuItem Header="Copiar" Command="ApplicationCommands.Copy"/>
+            <MenuItem Header="Pegar" Command="ApplicationCommands.Paste"/>
+        </ContextMenu>
+        
     </Window.Resources>
     
     <Window.CommandBindings>
@@ -116,7 +122,7 @@
         </StatusBar>
 
         <Border BorderBrush="Gray" Margin="10" BorderThickness="1">
-            <Grid>
+            <Grid ContextMenu="{StaticResource EditContextMenu}">
                 <ListBox Name="ItemsListBox"/>
             </Grid>
         </Border>

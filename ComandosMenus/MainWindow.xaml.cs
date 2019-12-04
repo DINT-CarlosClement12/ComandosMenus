@@ -24,19 +24,18 @@ namespace ComandosMenus
     {
 
         private string clipboard;
-        private DispatcherTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            timer = new DispatcherTimer
+            DispatcherTimer timer = new DispatcherTimer
             {
-                Interval = new TimeSpan(0, 0, 0, 0, 1000)
+                Interval = new TimeSpan(0, 0, 0, 0, 1000),
+                IsEnabled = true
             };
             timer.Tick += IntervalElapsed;
             timer.Start();
-            timer.IsEnabled = true;
         }
 
         private void IntervalElapsed(object sender, EventArgs e)
