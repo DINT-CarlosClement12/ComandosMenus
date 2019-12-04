@@ -9,6 +9,7 @@
         Title="Cocaína" Height="450" Width="800" Icon="img/menu.ico">
 
     <Window.Resources>
+        
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <ContextMenu x:Key="EditContextMenu">
@@ -19,6 +20,9 @@
     </Window.Resources>
     
     <Window.CommandBindings>
+        
+        <!--#region FILE-->
+        
         <CommandBinding
             Command="ApplicationCommands.New"
             Executed="FileCommands_New_Executed"
@@ -27,6 +31,10 @@
             Command="commands:FileCommands.Exit"
             Executed="FileCommands_Exit_Executed"
             CanExecute="FileCommands_Exit_CanExecute"/>
+        
+        <!--#endregion FILE-->
+
+        <!--#region EDIT-->
 
         <CommandBinding
             Command="ApplicationCommands.Copy"
@@ -37,16 +45,25 @@
             Executed="FileCommands_Paste_Executed"
             CanExecute="FileCommands_Paste_CanExecute"/>
 
+        <!--#endregion EDIT-->
+
+        <!--#region SHOW-->
+
         <CommandBinding
             Command="commands:EditCommands.Clear"
             Executed="FileCommands_Clear_Executed"
             CanExecute="FileCommands_Clear_CanExecute"/>
+
+        <!--#endregion SHOW-->
+        
     </Window.CommandBindings>
     
     <DockPanel LastChildFill="True">
 
         <Menu DockPanel.Dock="Top">
-            
+
+            <!--#region FILE-->
+
             <MenuItem Header="_Archivo">
                 <MenuItem Header="_Nuevo" x:Name="File_AddMenuItem" Command="ApplicationCommands.New">
                     <MenuItem.Icon>
@@ -60,6 +77,10 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+
+            <!--#endregion FILE-->
+
+            <!--#region EDIT-->
 
             <MenuItem Header="_Editar">
                 <MenuItem Header="_Copiar" x:Name="Edit_CopyMenuItem" Command="ApplicationCommands.Copy">
@@ -80,14 +101,22 @@
                 </MenuItem>
             </MenuItem>
 
+            <!--#endregion EDIT-->
+
+            <!--#region SHOW-->
+
             <MenuItem Header="_Ver">
                 <MenuItem x:Name="Show_GeneralMenuItem" Header="Barra de herramientas _General" IsCheckable="True" IsChecked="True"/>
                 <MenuItem x:Name="Show_EdicionMenuItem" Header="Barra de herramientas de _Edición" IsCheckable="True" IsChecked="True"/>
             </MenuItem>
 
+            <!--#endregion SHOW-->
+
         </Menu>
 
         <ToolBarTray DockPanel.Dock="Top">
+
+            <!--#region FILE-->
 
             <ToolBar Visibility="{Binding ElementName=Show_GeneralMenuItem, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button x:Name="AddToolbar" Command="ApplicationCommands.New">
@@ -97,6 +126,10 @@
                     <Image Source="img/exit.ico"/>
                 </Button>
             </ToolBar>
+
+            <!--#endregion FILE-->
+
+            <!--#region EDIT-->
 
             <ToolBar Visibility="{Binding ElementName=Show_EdicionMenuItem, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button x:Name="CopyToolbar" Command="ApplicationCommands.Copy">
@@ -109,6 +142,8 @@
                     <Image Source="img/delete.ico"/>
                 </Button>
             </ToolBar>
+
+            <!--#endregion EDIT-->
 
         </ToolBarTray>
 
